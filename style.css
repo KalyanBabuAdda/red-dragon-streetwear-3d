@@ -1,10 +1,12 @@
 /* ========================================
    RED DRAGON STREETWEAR
-   Main Styles
+   COMPLETE STYLESHEET
 ======================================== */
 
 
-/* ---------- RESET ---------- */
+/* ========================================
+   RESET
+======================================== */
 
 * {
     margin: 0;
@@ -20,13 +22,17 @@ body {
     background: #050505;
     color: #ffffff;
     font-family: Arial, Helvetica, sans-serif;
+    overflow-x: hidden;
 }
 
 
-/* ---------- NAVBAR ---------- */
+/* ========================================
+   NAVBAR
+======================================== */
 
 .navbar {
     position: fixed;
+
     top: 0;
     left: 0;
 
@@ -43,55 +49,90 @@ body {
     background: rgba(5, 5, 5, 0.75);
 
     backdrop-filter: blur(12px);
+    -webkit-backdrop-filter: blur(12px);
+
+    border-bottom: 1px solid rgba(255, 255, 255, 0.04);
 }
+
+
+/* Logo */
 
 .logo {
     font-size: 18px;
+
     font-weight: 900;
+
     letter-spacing: 2px;
+
+    white-space: nowrap;
 }
+
+
+/* Navigation */
 
 .navbar nav {
     display: flex;
+
     gap: 35px;
 }
 
 .navbar nav a {
     color: #ffffff;
+
     text-decoration: none;
 
     font-size: 12px;
+
     letter-spacing: 2px;
 
-    transition: 0.3s;
+    transition:
+        color 0.3s ease,
+        opacity 0.3s ease;
 }
 
 .navbar nav a:hover {
     color: #ff2020;
 }
 
+
+/* Cart */
+
 .cart {
     font-size: 14px;
+
+    white-space: nowrap;
+}
+
+.cart span {
+    color: #ff2020;
+
+    margin-left: 4px;
 }
 
 
-/* ---------- HERO ---------- */
+/* ========================================
+   HERO
+======================================== */
 
 .hero {
     min-height: 100vh;
 
     display: flex;
+
     align-items: center;
 
     position: relative;
 
     overflow: hidden;
 
-    padding: 120px 8% 60px;
+    padding:
+        120px
+        8%
+        60px;
 }
 
 
-/* red cinematic glow */
+/* Cinematic red atmosphere */
 
 .hero::before {
 
@@ -102,73 +143,134 @@ body {
     width: 700px;
     height: 700px;
 
-    background: radial-gradient(
-        circle,
-        rgba(180, 0, 0, 0.22),
-        transparent 70%
-    );
-
     right: -200px;
     top: 50%;
 
     transform: translateY(-50%);
 
+    background:
+        radial-gradient(
+            circle,
+            rgba(180, 0, 0, 0.22),
+            transparent 70%
+        );
+
+    pointer-events: none;
+
+    filter: blur(10px);
+}
+
+
+/* Additional dark gradient */
+
+.hero::after {
+
+    content: "";
+
+    position: absolute;
+
+    inset: 0;
+
+    background:
+        linear-gradient(
+            90deg,
+            rgba(5, 5, 5, 0.95) 0%,
+            rgba(5, 5, 5, 0.55) 45%,
+            rgba(5, 5, 5, 0.1) 100%
+        );
+
     pointer-events: none;
 }
 
 
-/* ---------- HERO TEXT ---------- */
+/* ========================================
+   HERO CONTENT
+======================================== */
 
 .hero-content {
+
     width: 50%;
 
     position: relative;
 
-    z-index: 2;
+    z-index: 5;
 }
 
+
+/* Small heading */
+
 .eyebrow {
+
     font-size: 11px;
 
     letter-spacing: 5px;
 
-    color: #999;
+    color: #999999;
 
     margin-bottom: 25px;
 }
 
+
+/* Main title */
+
 .hero h1 {
-    font-size: clamp(55px, 8vw, 120px);
+
+    font-size:
+        clamp(
+            55px,
+            8vw,
+            120px
+        );
 
     line-height: 0.85;
 
     font-weight: 900;
 
     letter-spacing: -5px;
+
+    text-transform: uppercase;
 }
+
+
+/* Red word */
 
 .hero h1 span {
+
     color: #e50909;
+
+    text-shadow:
+        0 0 30px
+        rgba(229, 9, 9, 0.15);
 }
 
+
+/* Description */
+
 .hero-description {
+
     max-width: 420px;
 
     margin-top: 35px;
 
-    color: #888;
+    color: #888888;
 
     line-height: 1.7;
 
     font-size: 15px;
 }
 
+
+/* Hero button */
+
 .hero-button {
+
     display: inline-block;
 
     margin-top: 40px;
 
-    padding: 17px 28px;
+    padding:
+        17px
+        28px;
 
     background: #ffffff;
 
@@ -182,18 +284,25 @@ body {
 
     letter-spacing: 2px;
 
-    transition: 0.3s;
+    transition:
+        background 0.3s ease,
+        color 0.3s ease,
+        transform 0.3s ease;
 }
 
 .hero-button:hover {
+
     background: #e50909;
+
     color: #ffffff;
 
     transform: translateY(-3px);
 }
 
 
-/* ---------- HERO PRODUCT ---------- */
+/* ========================================
+   HERO PRODUCT
+======================================== */
 
 .hero-product {
 
@@ -202,73 +311,148 @@ body {
     display: flex;
 
     justify-content: center;
+
     align-items: center;
 
     position: relative;
+
+    perspective: 1000px;
+
+    --glow-x: 50%;
+    --glow-y: 50%;
 }
 
-.hero-shirt {
 
-    width: min(500px, 90%);
-
-    position: relative;
-
-    z-index: 2;
-
-    filter:
-        drop-shadow(0 40px 50px rgba(0, 0, 0, 0.8));
-
-    animation: floatingShirt 4s ease-in-out infinite;
-
-    transition: transform 0.2s ease-out;
-}
+/* ========================================
+   PRODUCT GLOW
+======================================== */
 
 .product-glow {
 
     position: absolute;
 
-    width: 450px;
-    height: 450px;
+    width: 500px;
+    height: 500px;
 
     border-radius: 50%;
 
-    background: radial-gradient(
-        circle,
-        rgba(255, 0, 0, 0.18),
-        transparent 70%
-    );
+    background:
+        radial-gradient(
+            circle at var(--glow-x) var(--glow-y),
+            rgba(255, 0, 0, 0.28),
+            rgba(120, 0, 0, 0.12) 35%,
+            transparent 70%
+        );
 
-    filter: blur(20px);
+    filter: blur(25px);
+
+    pointer-events: none;
+
+    animation:
+        cinematicGlow
+        5s
+        ease-in-out
+        infinite;
 }
 
 
-/* ---------- FLOATING ANIMATION ---------- */
+/* ========================================
+   HERO SHIRT
+======================================== */
 
-@keyframes floatingShirt {
+.hero-shirt {
+
+    width:
+        min(
+            500px,
+            90%
+        );
+
+    position: relative;
+
+    z-index: 2;
+
+    transform-style: preserve-3d;
+
+    will-change: transform;
+
+    filter:
+        drop-shadow(
+            0 40px 50px
+            rgba(0, 0, 0, 0.85)
+        );
+
+    transition:
+        filter 0.3s ease;
+
+    cursor: pointer;
+
+    user-select: none;
+
+    -webkit-user-drag: none;
+}
+
+
+.hero-shirt:hover {
+
+    filter:
+        drop-shadow(
+            0 45px 65px
+            rgba(120, 0, 0, 0.55)
+        );
+}
+
+
+/* ========================================
+   CINEMATIC GLOW ANIMATION
+======================================== */
+
+@keyframes cinematicGlow {
 
     0% {
-        transform: translateY(0px);
+
+        opacity: 0.7;
+
+        transform:
+            scale(0.95);
     }
 
     50% {
-        transform: translateY(-20px);
+
+        opacity: 1;
+
+        transform:
+            scale(1.05);
     }
 
     100% {
-        transform: translateY(0px);
+
+        opacity: 0.7;
+
+        transform:
+            scale(0.95);
     }
 
 }
 
 
-/* ---------- COLLECTION ---------- */
+/* ========================================
+   COLLECTION
+======================================== */
 
 .collection {
 
-    padding: 140px 6%;
+    padding:
+        140px
+        6%;
 
     background: #090909;
+
+    position: relative;
 }
+
+
+/* Section heading */
 
 .section-heading {
 
@@ -287,7 +471,7 @@ body {
 
     letter-spacing: 4px;
 
-    color: #888;
+    color: #888888;
 }
 
 .section-heading h2 {
@@ -298,56 +482,118 @@ body {
 }
 
 
-/* ---------- PRODUCTS ---------- */
+/* ========================================
+   PRODUCT GRID
+======================================== */
 
 .products {
 
     display: grid;
 
     grid-template-columns:
-        repeat(3, 1fr);
+        repeat(
+            3,
+            1fr
+        );
 
     gap: 25px;
 }
 
+
+/* Product card */
+
 .product-card {
 
-    background: #111;
+    background: #111111;
 
     overflow: hidden;
 
-    transition: 0.4s;
+    position: relative;
+
+    transition:
+        transform 0.4s ease,
+        background 0.4s ease;
 }
 
 .product-card:hover {
 
-    transform: translateY(-10px);
+    transform:
+        translateY(-10px);
 
     background: #151515;
 }
 
+
+/* ========================================
+   PRODUCT IMAGE
+======================================== */
+
 .product-image {
 
-    aspect-ratio: 1 / 1.15;
+    aspect-ratio:
+        1 / 1.15;
 
     display: flex;
 
     justify-content: center;
+
     align-items: center;
 
     background: #0d0d0d;
 
     overflow: hidden;
+
+    position: relative;
 }
+
+
+/* Red glow behind cards */
+
+.product-image::before {
+
+    content: "";
+
+    position: absolute;
+
+    width: 250px;
+    height: 250px;
+
+    border-radius: 50%;
+
+    background:
+        radial-gradient(
+            circle,
+            rgba(180, 0, 0, 0.12),
+            transparent 70%
+        );
+
+    filter: blur(20px);
+
+    pointer-events: none;
+}
+
 
 .product-image img {
 
     width: 90%;
 
-    transition: 0.5s;
+    position: relative;
+
+    z-index: 2;
+
+    transition:
+        transform 0.5s ease;
+
+    filter:
+        drop-shadow(
+            0 25px 30px
+            rgba(0, 0, 0, 0.7)
+        );
 }
 
-.product-card:hover .product-image img {
+
+.product-card:hover
+.product-image img {
 
     transform:
         scale(1.08)
@@ -355,12 +601,15 @@ body {
 }
 
 
-/* ---------- PRODUCT INFO ---------- */
+/* ========================================
+   PRODUCT INFORMATION
+======================================== */
 
 .product-info {
 
     padding: 25px;
 }
+
 
 .product-info span {
 
@@ -371,16 +620,20 @@ body {
     letter-spacing: 2px;
 }
 
+
 .product-info h3 {
 
     margin-top: 10px;
 
     font-size: 24px;
+
+    font-weight: 800;
 }
+
 
 .product-info p {
 
-    color: #777;
+    color: #777777;
 
     font-size: 11px;
 
@@ -389,11 +642,16 @@ body {
     margin-top: 8px;
 }
 
+
+/* Product button */
+
 .product-info button {
 
     margin-top: 25px;
 
-    padding: 12px 0;
+    padding:
+        12px
+        0;
 
     background: none;
 
@@ -406,10 +664,21 @@ body {
     font-size: 11px;
 
     letter-spacing: 2px;
+
+    transition:
+        color 0.3s ease;
 }
 
 
-/* ---------- ABOUT ---------- */
+.product-info button:hover {
+
+    color: #e50909;
+}
+
+
+/* ========================================
+   ABOUT SECTION
+======================================== */
 
 .about {
 
@@ -425,41 +694,132 @@ body {
 
     text-align: center;
 
-    padding: 100px 20px;
+    padding:
+        100px
+        20px;
+
+    position: relative;
+
+    overflow: hidden;
 }
+
+
+/* Background glow */
+
+.about::before {
+
+    content: "";
+
+    position: absolute;
+
+    width: 500px;
+    height: 500px;
+
+    border-radius: 50%;
+
+    background:
+        radial-gradient(
+            circle,
+            rgba(120, 0, 0, 0.10),
+            transparent 70%
+        );
+
+    filter: blur(30px);
+
+    pointer-events: none;
+}
+
+
+/* About heading */
 
 .about h2 {
 
-    font-size: clamp(45px, 8vw, 100px);
+    font-size:
+        clamp(
+            45px,
+            8vw,
+            100px
+        );
 
     line-height: 0.9;
 
     margin-bottom: 35px;
+
+    position: relative;
+
+    z-index: 2;
 }
+
+
+/* About paragraph */
 
 .about > p:last-child {
 
     max-width: 450px;
 
-    color: #777;
+    color: #777777;
 
     line-height: 1.7;
+
+    position: relative;
+
+    z-index: 2;
 }
 
 
-/* ---------- FOOTER ---------- */
+/* ========================================
+   FOOTER
+======================================== */
 
 footer {
 
-    padding: 30px 6%;
+    padding:
+        30px
+        6%;
 
-    border-top: 1px solid #222;
+    border-top:
+        1px solid #222222;
 
-    color: #555;
+    color: #555555;
 
     font-size: 11px;
 
     letter-spacing: 2px;
+}
+
+
+/* ========================================
+   TABLET
+======================================== */
+
+@media (max-width: 1000px) {
+
+    .hero {
+
+        padding-left: 5%;
+        padding-right: 5%;
+    }
+
+    .hero h1 {
+
+        font-size:
+            clamp(
+                50px,
+                8vw,
+                85px
+            );
+    }
+
+    .hero-shirt {
+
+        width: 95%;
+    }
+
+    .products {
+
+        gap: 18px;
+    }
+
 }
 
 
@@ -469,11 +829,26 @@ footer {
 
 @media (max-width: 800px) {
 
+    /* Navbar */
+
+    .navbar {
+
+        padding:
+            20px
+            5%;
+    }
+
     .navbar nav {
+
         display: none;
     }
 
+
+    /* Hero */
+
     .hero {
+
+        min-height: 100svh;
 
         flex-direction: column;
 
@@ -481,42 +856,246 @@ footer {
 
         text-align: center;
 
-        padding-top: 130px;
+        padding:
+            120px
+            20px
+            50px;
     }
+
 
     .hero-content {
 
         width: 100%;
     }
 
+
     .hero h1 {
 
-        font-size: 65px;
+        font-size:
+            clamp(
+                55px,
+                16vw,
+                75px
+            );
 
-        letter-spacing: -3px;
+        letter-spacing:
+            -3px;
     }
+
 
     .hero-description {
 
         margin-left: auto;
+
         margin-right: auto;
+
+        max-width: 350px;
     }
+
+
+    .hero-button {
+
+        margin-top: 30px;
+    }
+
+
+    /* Product */
 
     .hero-product {
 
         width: 100%;
 
-        margin-top: 40px;
+        margin-top: 35px;
+
+        min-height: 350px;
     }
+
 
     .hero-shirt {
 
         width: 85%;
+
+        max-width: 400px;
     }
+
+
+    .product-glow {
+
+        width: 380px;
+
+        height: 380px;
+    }
+
+
+    /* Collection */
+
+    .collection {
+
+        padding:
+            100px
+            5%;
+    }
+
+
+    .section-heading {
+
+        margin-bottom: 40px;
+    }
+
+
+    .section-heading h2 {
+
+        font-size: 28px;
+    }
+
+
+    /* Product cards */
 
     .products {
 
         grid-template-columns: 1fr;
+
+        gap: 30px;
+    }
+
+
+    .product-card:hover {
+
+        transform:
+            translateY(-5px);
+    }
+
+
+    /* About */
+
+    .about {
+
+        min-height: 60vh;
+
+        padding:
+            80px
+            20px;
+    }
+
+
+    .about h2 {
+
+        font-size:
+            clamp(
+                45px,
+                14vw,
+                70px
+            );
+    }
+
+}
+
+
+/* ========================================
+   SMALL PHONES
+======================================== */
+
+@media (max-width: 480px) {
+
+    .logo {
+
+        font-size: 15px;
+
+        letter-spacing: 1.5px;
+    }
+
+
+    .cart {
+
+        font-size: 13px;
+    }
+
+
+    .hero {
+
+        padding-top: 110px;
+    }
+
+
+    .hero h1 {
+
+        font-size: 52px;
+
+        letter-spacing: -2px;
+    }
+
+
+    .eyebrow {
+
+        font-size: 9px;
+
+        letter-spacing: 3px;
+    }
+
+
+    .hero-description {
+
+        font-size: 13px;
+    }
+
+
+    .hero-product {
+
+        min-height: 300px;
+    }
+
+
+    .hero-shirt {
+
+        width: 95%;
+    }
+
+
+    .product-glow {
+
+        width: 320px;
+
+        height: 320px;
+    }
+
+
+    .collection {
+
+        padding:
+            80px
+            5%;
+    }
+
+
+    .product-info h3 {
+
+        font-size: 21px;
+    }
+
+}
+
+
+/* ========================================
+   REDUCED MOTION
+======================================== */
+
+@media (prefers-reduced-motion: reduce) {
+
+    html {
+
+        scroll-behavior: auto;
+    }
+
+    .product-glow {
+
+        animation: none;
+    }
+
+    .product-card,
+    .product-image img,
+    .hero-button {
+
+        transition: none;
     }
 
 }

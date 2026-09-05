@@ -1063,4 +1063,11 @@ footer {
     }
 
 }
-```
+.hero-shirt-3d {
+    touch-action: pan-y;
+    cursor: grab;
+}
+
+.hero-shirt-3d:active {
+    cursor: grabbing;
+}

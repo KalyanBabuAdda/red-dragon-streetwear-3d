@@ -142,7 +142,7 @@ const heroShirt = document.getElementById("hero-shirt");
 if (heroShirt) {
 
     const heroFront = "assets/product-1-front.png";
-    const heroBack = "assets/product-1-back.jpeg";
+    const heroBack = "assets/product-1-back.png";
 
     let showingFront = true;
 

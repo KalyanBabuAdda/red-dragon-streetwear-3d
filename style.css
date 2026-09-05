@@ -1110,8 +1110,3 @@ footer {
     transform-style: preserve-3d;
     backface-visibility: hidden;
 }
-
-.hero-shirt.hero-flipping {
-    transform: rotateY(90deg) scale(0.96);
-    opacity: 0.15;
-}

@@ -1,7 +1,6 @@
 /* ========================================
    RED DRAGON STREETWEAR
-   3D HERO SHIRT
-   Floating + Mouse Movement + Auto Flip
+   CONTINUOUS 3D HERO SHIRT
 ======================================== */
 
 const heroShirt = document.querySelector(".hero-shirt-3d");
@@ -10,7 +9,7 @@ const heroProduct = document.querySelector(".hero-product");
 if (heroShirt && heroProduct) {
 
     /* ========================================
-       MOVEMENT
+       MOUSE MOVEMENT
     ======================================== */
 
     let mouseX = 0;
@@ -21,16 +20,16 @@ if (heroShirt && heroProduct) {
 
 
     /* ========================================
-       AUTO ROTATION
+       CONTINUOUS ROTATION
     ======================================== */
 
     let autoRotation = 0;
 
-    let flipStart = 0;
-    let flipping = false;
-
-    const flipDuration = 1200;
-    const flipEvery = 5000;
+    /*
+     * Rotation speed.
+     * Higher number = faster rotation.
+     */
+    const rotationSpeed = 0.025;
 
 
     /* ========================================
@@ -40,10 +39,10 @@ if (heroShirt && heroProduct) {
     document.addEventListener("mousemove", (event) => {
 
         mouseX =
-            (event.clientX / window.innerWidth - 0.5);
+            (event.clientX / window.innerWidth) - 0.5;
 
         mouseY =
-            (event.clientY / window.innerHeight - 0.5);
+            (event.clientY / window.innerHeight) - 0.5;
 
     });
 
@@ -59,58 +58,30 @@ if (heroShirt && heroProduct) {
         const touch = event.touches[0];
 
         mouseX =
-            (touch.clientX / window.innerWidth - 0.5);
+            (touch.clientX / window.innerWidth) - 0.5;
 
         mouseY =
-            (touch.clientY / window.innerHeight - 0.5);
+            (touch.clientY / window.innerHeight) - 0.5;
 
     }, { passive: true });
 
 
     /* ========================================
-       EASING
+       PRELOAD SHIRT IMAGES
     ======================================== */
 
-    function easeInOut(t) {
+    const frontImage = new Image();
+    frontImage.src = "assets/product-1-front.png";
 
-        return t < 0.5
-            ? 2 * t * t
-            : 1 - Math.pow(-2 * t + 2, 2) / 2;
-
-    }
+    const backImage = new Image();
+    backImage.src = "assets/product-1-back.png";
 
 
     /* ========================================
-       START FLIP
+       MAIN ANIMATION
     ======================================== */
 
-    function startFlip() {
-
-        if (flipping) return;
-
-        flipping = true;
-
-        flipStart = performance.now();
-
-    }
-
-
-    /* ========================================
-       AUTO FLIP
-    ======================================== */
-
-    setInterval(() => {
-
-        startFlip();
-
-    }, flipEvery);
-
-
-    /* ========================================
-       ANIMATION
-    ======================================== */
-
-    function animate(time) {
+    function animateProduct(time) {
 
         /* ------------------------------------
            SMOOTH MOUSE MOVEMENT
@@ -124,7 +95,7 @@ if (heroShirt && heroProduct) {
 
 
         /* ------------------------------------
-           FLOATING
+           FLOATING EFFECT
         ------------------------------------ */
 
         const floating =
@@ -136,105 +107,32 @@ if (heroShirt && heroProduct) {
         ------------------------------------ */
 
         const mouseRotateY =
-            currentX * 20;
+            currentX * 18;
 
         const mouseRotateX =
             currentY * -12;
 
 
         /* ------------------------------------
-           AUTO FLIP
+           CONTINUOUS 360° ROTATION
         ------------------------------------ */
 
-        if (flipping) {
-
-            const elapsed =
-                time - flipStart;
-
-            let progress =
-                Math.min(elapsed / flipDuration, 1);
-
-            progress =
-                easeInOut(progress);
-
-            autoRotation =
-                180 * progress;
-
-            if (elapsed >= flipDuration) {
-
-                autoRotation = 180;
-
-                flipping = false;
-
-                /*
-                 * After reaching the back,
-                 * wait for the next interval,
-                 * then rotate another 180 degrees.
-                 */
-
-                setTimeout(() => {
-
-                    flipStart = performance.now();
-                    flipping = true;
-
-                }, 3000);
-
-            }
-
-        }
+        autoRotation += rotationSpeed;
 
 
-        /* ------------------------------------
-           RETURN FLIP
-        ------------------------------------ */
-
-        if (!flipping && autoRotation >= 180) {
-
-            /*
-             * When the next flip starts,
-             * rotate from 180 to 360.
-             */
-
-            if (performance.now() - flipStart > 3000) {
-
-                let elapsed =
-                    performance.now() - flipStart;
-
-                let progress =
-                    Math.min(elapsed / flipDuration, 1);
-
-                progress =
-                    easeInOut(progress);
-
-                autoRotation =
-                    180 + (180 * progress);
-
-                if (progress >= 1) {
-
-                    autoRotation = 360;
-
-                    flipping = false;
-
-                }
-
-            }
-
-        }
-
-
-        /* ------------------------------------
-           NORMALIZE ROTATION
-        ------------------------------------ */
+        /*
+         * Keep the angle between 0 and 360.
+         */
 
         if (autoRotation >= 360) {
 
-            autoRotation = 0;
+            autoRotation -= 360;
 
         }
 
 
         /* ------------------------------------
-           APPLY TRANSFORM
+           APPLY ALL TRANSFORMS
         ------------------------------------ */
 
         heroShirt.style.transform = `
@@ -266,11 +164,19 @@ if (heroShirt && heroProduct) {
         );
 
 
-        requestAnimationFrame(animate);
+        /* ------------------------------------
+           LOOP
+        ------------------------------------ */
+
+        requestAnimationFrame(animateProduct);
 
     }
 
 
-    requestAnimationFrame(animate);
+    /* ========================================
+       START
+    ======================================== */
+
+    requestAnimationFrame(animateProduct);
 
 }

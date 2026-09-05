@@ -8,9 +8,7 @@ const heroProduct = document.querySelector(".hero-product");
 
 if (heroShirt && heroProduct) {
 
-    /* ========================================
-       MOUSE MOVEMENT
-    ======================================== */
+    let rotation = 0;
 
     let mouseX = 0;
     let mouseY = 0;
@@ -20,155 +18,113 @@ if (heroShirt && heroProduct) {
 
 
     /* ========================================
-       CONTINUOUS ROTATION
+       MOUSE MOVEMENT
     ======================================== */
 
-    let autoRotation = 0;
-
-    /*
-     * Rotation speed.
-     * Higher number = faster rotation.
-     */
-    const rotationSpeed = 3;
-
-
-    /* ========================================
-       MOUSE
-    ======================================== */
-
-    document.addEventListener("mousemove", (event) => {
+    document.addEventListener("mousemove", function (event) {
 
         mouseX =
-            (event.clientX / window.innerWidth) - 0.5;
+            (event.clientX / window.innerWidth - 0.5);
 
         mouseY =
-            (event.clientY / window.innerHeight) - 0.5;
+            (event.clientY / window.innerHeight - 0.5);
 
     });
 
 
     /* ========================================
-       TOUCH
+       TOUCH MOVEMENT
     ======================================== */
 
-    document.addEventListener("touchmove", (event) => {
+    document.addEventListener("touchmove", function (event) {
 
         if (!event.touches.length) return;
 
         const touch = event.touches[0];
 
         mouseX =
-            (touch.clientX / window.innerWidth) - 0.5;
+            (touch.clientX / window.innerWidth - 0.5);
 
         mouseY =
-            (touch.clientY / window.innerHeight) - 0.5;
+            (touch.clientY / window.innerHeight - 0.5);
 
     }, { passive: true });
 
 
     /* ========================================
-       PRELOAD SHIRT IMAGES
+       ANIMATION
     ======================================== */
 
-    const frontImage = new Image();
-    frontImage.src = "assets/product-1-front.png";
-
-    const backImage = new Image();
-    backImage.src = "assets/product-1-back.png";
-
-
-    /* ========================================
-       MAIN ANIMATION
-    ======================================== */
-
-    function animateProduct(time) {
+    function animate(time) {
 
         /* ------------------------------------
            SMOOTH MOUSE MOVEMENT
         ------------------------------------ */
 
         currentX +=
-            (mouseX - currentX) * 0.08;
+            (mouseX - currentX) * 0.05;
 
         currentY +=
-            (mouseY - currentY) * 0.08;
+            (mouseY - currentY) * 0.05;
 
 
         /* ------------------------------------
-           FLOATING EFFECT
+           CONTINUOUS ROTATION
         ------------------------------------ */
 
-        const floating =
-            Math.sin(time * 0.0015) * 12;
+        rotation += 0.6;
 
-
-        /* ------------------------------------
-           MOUSE ROTATION
-        ------------------------------------ */
-
-        const mouseRotateY =
-            currentX * 18;
-
-        const mouseRotateX =
-            currentY * -12;
-
-
-        /* ------------------------------------
-           CONTINUOUS 360° ROTATION
-        ------------------------------------ */
-
-        autoRotation += rotationSpeed;
-
-
-        /*
-         * Keep the angle between 0 and 360.
-         */
-
-        if (autoRotation >= 360) {
-
-            autoRotation -= 360;
-
+        if (rotation >= 360) {
+            rotation = 0;
         }
 
 
         /* ------------------------------------
-           APPLY ALL TRANSFORMS
+           FLOATING
         ------------------------------------ */
 
-        heroShirt.style.transform = `
-            translateY(${floating}px)
-            rotateX(${mouseRotateX}deg)
-            rotateY(${mouseRotateY + autoRotation}deg)
-            scale(1.02)
-        `;
+        const floating =
+            Math.sin(time * 0.0015) * 10;
 
 
         /* ------------------------------------
-           DYNAMIC GLOW
+           MOUSE TILT
         ------------------------------------ */
 
-        const glowX =
-            50 + currentX * 30;
+        const tiltX =
+            currentY * -8;
 
-        const glowY =
-            50 + currentY * 30;
+        const tiltY =
+            currentX * 10;
+
+
+        /* ------------------------------------
+           APPLY TRANSFORM
+        ------------------------------------ */
+
+        heroShirt.style.transform =
+            `translateY(${floating}px)
+             rotateX(${tiltX}deg)
+             rotateY(${rotation + tiltY}deg)
+             scale(1.02)`;
+
+
+        /* ------------------------------------
+           GLOW
+        ------------------------------------ */
 
         heroProduct.style.setProperty(
             "--glow-x",
-            `${glowX}%`
+            `${50 + currentX * 30}%`
         );
 
         heroProduct.style.setProperty(
             "--glow-y",
-            `${glowY}%`
+            `${50 + currentY * 30}%`
         );
 
 
-        /* ------------------------------------
-           LOOP
-        ------------------------------------ */
-
-        requestAnimationFrame(animateProduct);
+        requestAnimationFrame(animate);
 
     }
 
@@ -177,6 +133,6 @@ if (heroShirt && heroProduct) {
        START
     ======================================== */
 
-    requestAnimationFrame(animateProduct);
+    requestAnimationFrame(animate);
 
 }

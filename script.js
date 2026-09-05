@@ -133,3 +133,39 @@ if (shirt && heroProduct) {
     requestAnimationFrame(animateProduct);
 
 }
+/* =========================================
+   HERO SHIRT AUTO FRONT/BACK ROTATION
+========================================= */
+
+const heroShirt = document.getElementById("hero-shirt");
+
+if (heroShirt) {
+
+    const heroFront = "assets/product-1-front.png";
+    const heroBack = "assets/product-1-back.jpeg";
+
+    let showingFront = true;
+
+    // Preload the back image
+    const backImage = new Image();
+    backImage.src = heroBack;
+
+    setInterval(() => {
+
+        // Flip animation
+        heroShirt.classList.add("hero-flipping");
+
+        setTimeout(() => {
+
+            showingFront = !showingFront;
+
+            heroShirt.src = showingFront
+                ? heroFront
+                : heroBack;
+
+            heroShirt.classList.remove("hero-flipping");
+
+        }, 450);
+
+    }, 4000);
+}

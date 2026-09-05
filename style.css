@@ -1099,3 +1099,19 @@ footer {
     }
 
 }
+/* =========================================
+   HERO SHIRT FRONT / BACK FLIP
+========================================= */
+
+.hero-shirt {
+    transition:
+        transform 0.45s ease,
+        opacity 0.45s ease;
+    transform-style: preserve-3d;
+    backface-visibility: hidden;
+}
+
+.hero-shirt.hero-flipping {
+    transform: rotateY(90deg) scale(0.96);
+    opacity: 0.15;
+}

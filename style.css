@@ -259,6 +259,7 @@ body {
     position: relative;
 
     perspective: 1200px;
+   -webkit-perspective: 1200px;
 
     --glow-x: 50%;
     --glow-y: 50%;

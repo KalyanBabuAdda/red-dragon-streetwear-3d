@@ -390,10 +390,7 @@ body {
 ======================================== */
 
 .shirt-front {
-
-    transform:
-        rotateY(0deg)
-        translateZ(1px);
+    transform: rotateY(0deg) translateZ(2px);
 }
 
 
@@ -402,10 +399,7 @@ body {
 ======================================== */
 
 .shirt-back {
-
-    transform:
-        rotateY(180deg)
-        translateZ(1px);
+    transform: rotateY(180deg) translateZ(2px);
 }
 
 

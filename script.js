@@ -29,7 +29,7 @@ if (heroShirt && heroProduct) {
      * Rotation speed.
      * Higher number = faster rotation.
      */
-    const rotationSpeed = 0.025;
+    const rotationSpeed = 0.03;
 
 
     /* ========================================

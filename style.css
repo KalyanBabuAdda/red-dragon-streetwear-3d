@@ -1071,3 +1071,687 @@ footer {
 .hero-shirt-3d:active {
     cursor: grabbing;
 }
+
+/* ========================================
+   INDIVIDUAL PRODUCT SHOWCASE
+======================================== */
+
+.product-showcase-modal {
+
+    position: fixed;
+
+    inset: 0;
+
+    z-index: 1000;
+
+    display: flex;
+
+    align-items: center;
+
+    justify-content: center;
+
+    padding: 30px;
+
+    visibility: hidden;
+
+    opacity: 0;
+
+    pointer-events: none;
+
+    transition:
+        opacity 0.4s ease,
+        visibility 0.4s ease;
+
+}
+
+
+.product-showcase-modal.active {
+
+    visibility: visible;
+
+    opacity: 1;
+
+    pointer-events: auto;
+
+}
+
+
+/* ========================================
+   DARK OVERLAY
+======================================== */
+
+.showcase-overlay {
+
+    position: absolute;
+
+    inset: 0;
+
+    background:
+        rgba(0, 0, 0, 0.88);
+
+    backdrop-filter: blur(15px);
+
+    -webkit-backdrop-filter: blur(15px);
+
+}
+
+
+/* ========================================
+   SHOWCASE WINDOW
+======================================== */
+
+.showcase-window {
+
+    width: min(
+        1100px,
+        95vw
+    );
+
+    height: min(
+        720px,
+        90vh
+    );
+
+    position: relative;
+
+    z-index: 2;
+
+    background:
+        linear-gradient(
+            145deg,
+            #151515,
+            #080808
+        );
+
+    border:
+        1px solid
+        rgba(255, 255, 255, 0.08);
+
+    box-shadow:
+        0 40px 100px
+        rgba(0, 0, 0, 0.8);
+
+    overflow: hidden;
+
+}
+
+
+/* ========================================
+   CLOSE X
+======================================== */
+
+.showcase-close {
+
+    position: absolute;
+
+    top: 20px;
+
+    right: 25px;
+
+    z-index: 20;
+
+    width: 42px;
+
+    height: 42px;
+
+    border: 1px solid
+        rgba(255, 255, 255, 0.15);
+
+    background:
+        rgba(0, 0, 0, 0.5);
+
+    color: #ffffff;
+
+    font-size: 28px;
+
+    font-weight: 200;
+
+    cursor: pointer;
+
+    display: flex;
+
+    align-items: center;
+
+    justify-content: center;
+
+    transition:
+        background 0.3s ease,
+        border 0.3s ease,
+        color 0.3s ease;
+
+}
+
+.showcase-close:hover {
+
+    background: #e50909;
+
+    border-color: #e50909;
+
+}
+
+
+/* ========================================
+   SHOWCASE CONTENT
+======================================== */
+
+.showcase-content {
+
+    width: 100%;
+
+    height: 100%;
+
+    display: flex;
+
+    align-items: center;
+
+}
+
+
+/* ========================================
+   SHOWCASE PRODUCT AREA
+======================================== */
+
+.showcase-product {
+
+    width: 60%;
+
+    height: 100%;
+
+    display: flex;
+
+    align-items: center;
+
+    justify-content: center;
+
+    position: relative;
+
+    perspective: 1400px;
+
+    -webkit-perspective: 1400px;
+
+}
+
+
+/* ========================================
+   SHOWCASE GLOW
+======================================== */
+
+.showcase-glow {
+
+    position: absolute;
+
+    width: 500px;
+
+    height: 500px;
+
+    border-radius: 50%;
+
+    background:
+        radial-gradient(
+            circle,
+            rgba(220, 0, 0, 0.25),
+            rgba(120, 0, 0, 0.10) 40%,
+            transparent 70%
+        );
+
+    filter: blur(30px);
+
+    animation:
+        showcaseGlow 5s
+        ease-in-out
+        infinite;
+
+    pointer-events: none;
+
+}
+
+
+/* ========================================
+   SHOWCASE SHIRT
+======================================== */
+
+.showcase-shirt {
+
+    width: min(
+        500px,
+        85%
+    );
+
+    aspect-ratio: 1 / 1.15;
+
+    position: relative;
+
+    transform-style:
+        preserve-3d;
+
+    -webkit-transform-style:
+        preserve-3d;
+
+    cursor: grab;
+
+    touch-action: pan-y;
+
+    user-select: none;
+
+    will-change: transform;
+
+}
+
+
+/* ========================================
+   SHOWCASE FACES
+======================================== */
+
+.showcase-face {
+
+    position: absolute;
+
+    inset: 0;
+
+    width: 100%;
+
+    height: 100%;
+
+    display: flex;
+
+    align-items: center;
+
+    justify-content: center;
+
+    backface-visibility:
+        hidden;
+
+    -webkit-backface-visibility:
+        hidden;
+
+    transform-style:
+        preserve-3d;
+
+}
+
+
+/* ========================================
+   SHOWCASE FRONT
+======================================== */
+
+.showcase-front {
+
+    transform:
+        rotateY(0deg)
+        translateZ(2px);
+
+}
+
+
+/* ========================================
+   SHOWCASE BACK
+======================================== */
+
+.showcase-back {
+
+    transform:
+        rotateY(180deg)
+        translateZ(2px);
+
+}
+
+
+/* ========================================
+   SHOWCASE IMAGES
+======================================== */
+
+.showcase-face img {
+
+    width: 100%;
+
+    height: 100%;
+
+    object-fit: contain;
+
+    display: block;
+
+    pointer-events: none;
+
+    user-select: none;
+
+    -webkit-user-drag: none;
+
+    filter:
+        drop-shadow(
+            0 35px 50px
+            rgba(0, 0, 0, 0.85)
+        );
+
+}
+
+
+/* ========================================
+   GRABBING
+======================================== */
+
+.showcase-shirt:active {
+
+    cursor: grabbing;
+
+}
+
+
+/* ========================================
+   SHOWCASE INFORMATION
+======================================== */
+
+.showcase-info {
+
+    width: 40%;
+
+    padding:
+        50px;
+
+    position: relative;
+
+    z-index: 5;
+
+}
+
+
+.showcase-number {
+
+    color: #e50909;
+
+    font-size: 12px;
+
+    letter-spacing: 4px;
+
+}
+
+
+.showcase-info h2 {
+
+    margin-top: 15px;
+
+    font-size:
+        clamp(
+            32px,
+            4vw,
+            58px
+        );
+
+    line-height: 0.95;
+
+    font-weight: 900;
+
+    letter-spacing: -2px;
+
+}
+
+
+.showcase-info > p {
+
+    margin-top: 15px;
+
+    color: #888888;
+
+    font-size: 12px;
+
+    letter-spacing: 3px;
+
+}
+
+
+.showcase-divider {
+
+    width: 60px;
+
+    height: 2px;
+
+    margin-top: 35px;
+
+    background: #e50909;
+
+}
+
+
+.showcase-instruction {
+
+    margin-top: 25px;
+
+    color: #666666 !important;
+
+    font-size: 10px !important;
+
+    letter-spacing: 3px !important;
+
+}
+
+
+/* ========================================
+   CLOSE BUTTON
+======================================== */
+
+.showcase-close-button {
+
+    margin-top: 35px;
+
+    padding:
+        14px
+        25px;
+
+    background: #ffffff;
+
+    color: #000000;
+
+    border: none;
+
+    font-size: 10px;
+
+    font-weight: bold;
+
+    letter-spacing: 2px;
+
+    cursor: pointer;
+
+    transition:
+        background 0.3s ease,
+        color 0.3s ease,
+        transform 0.3s ease;
+
+}
+
+
+.showcase-close-button:hover {
+
+    background: #e50909;
+
+    color: #ffffff;
+
+    transform:
+        translateY(-3px);
+
+}
+
+
+/* ========================================
+   GLOW ANIMATION
+======================================== */
+
+@keyframes showcaseGlow {
+
+    0% {
+
+        opacity: 0.6;
+
+        transform:
+            scale(0.95);
+
+    }
+
+    50% {
+
+        opacity: 1;
+
+        transform:
+            scale(1.05);
+
+    }
+
+    100% {
+
+        opacity: 0.6;
+
+        transform:
+            scale(0.95);
+
+    }
+
+}
+
+
+/* ========================================
+   MOBILE SHOWCASE
+======================================== */
+
+@media (max-width: 800px) {
+
+    .product-showcase-modal {
+
+        padding: 15px;
+
+    }
+
+
+    .showcase-window {
+
+        width: 100%;
+
+        height: 92vh;
+
+        max-height: none;
+
+    }
+
+
+    .showcase-content {
+
+        flex-direction: column;
+
+        overflow-y: auto;
+
+    }
+
+
+    .showcase-product {
+
+        width: 100%;
+
+        height: 58%;
+
+        min-height: 350px;
+
+        flex-shrink: 0;
+
+    }
+
+
+    .showcase-shirt {
+
+        width: 85%;
+
+        max-width: 380px;
+
+    }
+
+
+    .showcase-glow {
+
+        width: 350px;
+
+        height: 350px;
+
+    }
+
+
+    .showcase-info {
+
+        width: 100%;
+
+        padding:
+            15px
+            30px
+            30px;
+
+        text-align: center;
+
+    }
+
+
+    .showcase-info h2 {
+
+        font-size: 34px;
+
+    }
+
+
+    .showcase-divider {
+
+        margin-left: auto;
+
+        margin-right: auto;
+
+    }
+
+
+    .showcase-close-button {
+
+        margin-top: 25px;
+
+    }
+
+}
+
+
+/* ========================================
+   SMALL PHONES
+======================================== */
+
+@media (max-width: 480px) {
+
+    .showcase-product {
+
+        height: 55%;
+
+        min-height: 300px;
+
+    }
+
+
+    .showcase-shirt {
+
+        width: 92%;
+
+    }
+
+
+    .showcase-info {
+
+        padding:
+            10px
+            20px
+            25px;
+
+    }
+
+
+    .showcase-info h2 {
+
+        font-size: 29px;
+
+    }
+
+
+    .showcase-info > p {
+
+        font-size: 10px;
+
+    }
+
+}
